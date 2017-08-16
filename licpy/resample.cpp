@@ -72,7 +72,7 @@ void resample_endpoints_s(       //
 
 void init(pybindcpp::ExtModule &m) {
   using py_t = py_function<PyObject *(PyObject *)>;
-  py_t py("dec.licpy.resample_wrap", "resample_wrap");
+  py_t py("licpy.resample_wrap", "resample_wrap");
 
   m.add("resample", py(fun2obj(resample)));
   m.add("resample_s", py(fun2obj(resample_s)));
