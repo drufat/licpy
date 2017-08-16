@@ -8,7 +8,7 @@ def c(f):
 
 def resample_wrap(imp):
     """
-    >>> from dec.licpy.resample import resample, resample_s
+    >>> from licpy.resample import resample, resample_s
     >>> xx = np.array([1.1, 2.0, 3.1])
     >>> idx, yy = resample(xx, 10)
     >>> idx
@@ -22,7 +22,7 @@ def resample_wrap(imp):
     array([ 0.111,  0.333,  0.556,  0.778,  1.   ,  0.182,  0.364,  0.545,
             0.727,  0.909])
 
-    >>> from dec.licpy.resample import resample_endpoints, resample_endpoints_s
+    >>> from licpy.resample import resample_endpoints, resample_endpoints_s
     >>> idx, yy = resample_endpoints(xx, 11)
     >>> idx
     array([0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1], dtype=int32)

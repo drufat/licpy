@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 
-from dec.licpy.pixelize import pixelize
+from licpy.pixelize import pixelize
 
 INF = 1e10
 
