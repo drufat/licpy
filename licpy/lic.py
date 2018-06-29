@@ -75,7 +75,7 @@ def advance(ux, uy, fx, fy):
     >>> fy = [0.3, 0.3]
     >>> with tf.Session() as sess:
     ...     sess.run(g, feed_dict={ux_:ux, uy_:uy, fx_:fx, fy_:fy})
-    (array([ 0.4,  0.7]), array([1, 0]), array([0, 1]), array([ 0. ,  0.6]), array([ 0.3,  0. ]))
+    (array([0.4, 0.7]), array([1, 0]), array([0, 1]), array([0. , 0.6]), array([0.3, 0. ]))
     '''
     tx = get_t(ux, fx)
     ty = get_t(uy, fy)

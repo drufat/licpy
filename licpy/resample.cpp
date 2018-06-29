@@ -1,8 +1,4 @@
-// Copyright (C) 2010-2016 Dzhelil S. Rufat. All Rights Reserved.
-#include <pybindcpp/module.h>
-#include <pybindcpp/numpy.h>
-
-using namespace pybindcpp;
+// Copyright (C) 2010-2018 Dzhelil S. Rufat. All Rights Reserved.
 
 void resample(                   //
     const double *xx, int Nx,    //
@@ -70,18 +66,42 @@ void resample_endpoints_s(       //
   }
 }
 
-void init(pybindcpp::ExtModule &m) {
-  using py_t = py_function<PyObject *(PyObject *)>;
-  py_t py("licpy.resample_wrap", "resample_wrap");
+#include <pybind11/pybind11.h>
+#include <pybind11/numpy.h>
 
-  m.add("resample", py(fun2obj(resample)));
-  m.add("resample_s", py(fun2obj(resample_s)));
+namespace py = pybind11;
 
-  m.add("resample_endpoints", py(fun2obj(resample_endpoints)));
-  m.add("resample_endpoints_s", py(fun2obj(resample_endpoints_s)));
-}
+PYBIND11_MODULE(resample, m) {
 
-PyMODINIT_FUNC PyInit_resample(void) {
-  import_array();
-  return module_init("resample", init);
+    using array_d_t = py::array_t<double, py::array::c_style | py::array::forcecast>;
+    using array_i_t = py::array_t<int, py::array::c_style | py::array::forcecast>;
+
+    m.def("resample", [](array_d_t f, int N){
+        array_i_t out(N);
+        array_d_t fout(N);
+        resample(f.data(), f.shape(0), out.mutable_data(), fout.mutable_data(), N);
+        return py::make_tuple(out, fout);
+    });
+
+    m.def("resample_s", [](array_d_t f, int N){
+        array_i_t out(N);
+        array_d_t fout(N);
+        resample_s(f.data(), f.shape(0), out.mutable_data(), fout.mutable_data(), N);
+        return py::make_tuple(out, fout);
+    });
+
+    m.def("resample_endpoints", [](array_d_t f, int N){
+        array_i_t out(N);
+        array_d_t fout(N);
+        resample_endpoints(f.data(), f.shape(0), out.mutable_data(), fout.mutable_data(), N);
+        return py::make_tuple(out, fout);
+    });
+
+    m.def("resample_endpoints_s", [](array_d_t f, int N){
+        array_i_t out(N);
+        array_d_t fout(N);
+        resample_endpoints_s(f.data(), f.shape(0), out.mutable_data(), fout.mutable_data(), N);
+        return py::make_tuple(out, fout);
+    });
+
 }

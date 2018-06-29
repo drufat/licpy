@@ -2,17 +2,19 @@
 import glob, os
 
 import numpy
+import pybind11
 from setuptools import setup, Extension
 
 include_dirs = [
     'src',
-    '../pybindcpp/include',
     numpy.get_include(),
+    pybind11.get_include(True),
+    pybind11.get_include(False),
 ]
 
 depends = [
-              'setup.py',
-          ]
+    'setup.py',
+]
 
 extra_compile_args = [
     '-std=c++14',
@@ -20,9 +22,9 @@ extra_compile_args = [
 
 libraries = []
 
-if ('CC' in os.environ) and ('gcc' in os.environ['CC'] or 'g++' in os.environ['CC']):
-    extra_compile_args += ['-fopenmp']
-    libraries += ['gomp']
+# if ('CC' in os.environ) and ('gcc' in os.environ['CC'] or 'g++' in os.environ['CC']):
+#     extra_compile_args += ['-fopenmp']
+#     libraries += ['gomp']
 
 ext_modules = [
 
@@ -51,8 +53,8 @@ setup(
     license='GNU GPLv3',
     url='http://github.com/drufat/licpy.git',
     requires=[
+        'pybind11',
         'numpy',
         'tensorflow',
-        'pybindcpp',
     ],
 )
