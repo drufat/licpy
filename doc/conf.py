@@ -26,7 +26,7 @@ author = 'Dzhelil Rufat'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.2'
 
 
 # -- General configuration ---------------------------------------------------
@@ -152,7 +152,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'LicPy', 'LicPy Documentation',
-     author, 'LicPy', 'One line description of project.',
+     author, 'LicPy', 'Line Integral Convolution',
      'Miscellaneous'),
 ]
 

@@ -38,7 +38,7 @@ setup(
     packages=['licpy'],
     package_dir={'licpy': 'licpy'},
     ext_modules=ext_modules,
-    version='0.1',
+    version='0.2',
     description='Line Integral Convolution',
     author='Dzhelil Rufat',
     author_email='drufat@fastmail.com',
