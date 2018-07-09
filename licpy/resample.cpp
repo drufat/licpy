@@ -71,10 +71,10 @@ void resample_endpoints_s(       //
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(resample, m) {
+using array_d_t = py::array_t<double, py::array::c_style | py::array::forcecast>;
+using array_i_t = py::array_t<int, py::array::c_style | py::array::forcecast>;
 
-    using array_d_t = py::array_t<double, py::array::c_style | py::array::forcecast>;
-    using array_i_t = py::array_t<int, py::array::c_style | py::array::forcecast>;
+PYBIND11_MODULE(resample, m) {
 
     m.def("resample", [](array_d_t f, int N){
         array_i_t out(N);
