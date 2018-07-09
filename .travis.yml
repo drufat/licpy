@@ -1,0 +1,16 @@
+
+sudo: enabled
+language: python
+python: 
+  - "3.6"
+
+install:
+  - pip install --upgrade numpy pybind11 
+  - pip install --upgrade sympy tensorflow 
+  - pip install --upgrade matplotlib
+  - pip install --upgrade pytest
+  - python setup.py develop
+
+script:
+  - py.test --doctest-modules --disable-warnings licpy
+
