@@ -1,10 +1,7 @@
 // Copyright (C) 2010-2018 Dzhelil S. Rufat. All Rights Reserved.
 
-void resample(                   //
-    const double *xx, int Nx,    //
-    int *idx, double *yy, int Ny //
-    ) {
-
+void resample(const double* xx, int Nx,  //
+              int* idx, double* yy, int Ny) {
   auto dy = (xx[Nx - 1] - xx[0]) / Ny;
   auto y = xx[0] + 0.5 * dy;
 
@@ -19,10 +16,8 @@ void resample(                   //
   }
 }
 
-void resample_s(                 //
-    const double *xx, int Nx,    //
-    int *idx, double *ss, int Ns //
-    ) {
+void resample_s(const double* xx, int Nx,  //
+                int* idx, double* ss, int Ns) {
   auto yy = ss;
   resample(xx, Nx, idx, yy, Ns);
   int i;
@@ -32,11 +27,8 @@ void resample_s(                 //
   }
 }
 
-void resample_endpoints(         //
-    const double *xx, int Nx,    //
-    int *idx, double *yy, int Ny //
-    ) {
-
+void resample_endpoints(const double* xx, int Nx,  //
+                        int* idx, double* yy, int Ny) {
   auto dy = (xx[Nx - 1] - xx[0]) / (Ny - 1);
   auto y = xx[0];
 
@@ -53,10 +45,8 @@ void resample_endpoints(         //
   yy[Ny - 1] = xx[Nx - 1];
 }
 
-void resample_endpoints_s(       //
-    const double *xx, int Nx,    //
-    int *idx, double *ss, int Ns //
-    ) {
+void resample_endpoints_s(const double* xx, int Nx,  //
+                          int* idx, double* ss, int Ns) {
   auto yy = ss;
   resample_endpoints(xx, Nx, idx, yy, Ns);
   int i;
@@ -66,42 +56,44 @@ void resample_endpoints_s(       //
   }
 }
 
-#include <pybind11/pybind11.h>
 #include <pybind11/numpy.h>
+#include <pybind11/pybind11.h>
 
 namespace py = pybind11;
 
-using array_d_t = py::array_t<double, py::array::c_style | py::array::forcecast>;
-using array_i_t = py::array_t<int, py::array::c_style | py::array::forcecast>;
+using arr_d_t = py::array_t<double, py::array::c_style | py::array::forcecast>;
+using arr_i_t = py::array_t<int, py::array::c_style | py::array::forcecast>;
 
 PYBIND11_MODULE(resample, m) {
+  m.def("resample", [](arr_d_t f, int N) {
+    arr_i_t out(N);
+    arr_d_t fout(N);
+    resample(f.data(), f.shape(0),  //
+             out.mutable_data(), fout.mutable_data(), N);
+    return py::make_tuple(out, fout);
+  });
 
-    m.def("resample", [](array_d_t f, int N){
-        array_i_t out(N);
-        array_d_t fout(N);
-        resample(f.data(), f.shape(0), out.mutable_data(), fout.mutable_data(), N);
-        return py::make_tuple(out, fout);
-    });
+  m.def("resample_s", [](arr_d_t f, int N) {
+    arr_i_t out(N);
+    arr_d_t fout(N);
+    resample_s(f.data(), f.shape(0),  //
+               out.mutable_data(), fout.mutable_data(), N);
+    return py::make_tuple(out, fout);
+  });
 
-    m.def("resample_s", [](array_d_t f, int N){
-        array_i_t out(N);
-        array_d_t fout(N);
-        resample_s(f.data(), f.shape(0), out.mutable_data(), fout.mutable_data(), N);
-        return py::make_tuple(out, fout);
-    });
+  m.def("resample_endpoints", [](arr_d_t f, int N) {
+    arr_i_t out(N);
+    arr_d_t fout(N);
+    resample_endpoints(f.data(), f.shape(0),  //
+                       out.mutable_data(), fout.mutable_data(), N);
+    return py::make_tuple(out, fout);
+  });
 
-    m.def("resample_endpoints", [](array_d_t f, int N){
-        array_i_t out(N);
-        array_d_t fout(N);
-        resample_endpoints(f.data(), f.shape(0), out.mutable_data(), fout.mutable_data(), N);
-        return py::make_tuple(out, fout);
-    });
-
-    m.def("resample_endpoints_s", [](array_d_t f, int N){
-        array_i_t out(N);
-        array_d_t fout(N);
-        resample_endpoints_s(f.data(), f.shape(0), out.mutable_data(), fout.mutable_data(), N);
-        return py::make_tuple(out, fout);
-    });
-
+  m.def("resample_endpoints_s", [](arr_d_t f, int N) {
+    arr_i_t out(N);
+    arr_d_t fout(N);
+    resample_endpoints_s(f.data(), f.shape(0),  //
+                         out.mutable_data(), fout.mutable_data(), N);
+    return py::make_tuple(out, fout);
+  });
 }
