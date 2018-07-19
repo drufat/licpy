@@ -1,0 +1,5 @@
+pybind11
+tensorflow
+matplotlib
+pytest
+sympy
