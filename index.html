@@ -33,7 +33,7 @@
             
   <div class="section" id="licpy">
 <h1>LicPy<a class="headerlink" href="#licpy" title="Permalink to this headline">¶</a></h1>
-<p>There are a number of techniques to image vector fields. The most common one, known as hedgehog, is to draw an arrow at each point with a heading and a size matching the direction and magnitude of the vector field at that particular point (e.g. <code class="docutils literal notranslate"><span class="pre">quiver</span></code> in Matplotlib). Recently Cabral and Leedom <a class="reference internal" href="#cabral1993" id="id1">[CL93]</a> proposed a new method to image vector fields called <em>line integral convolution</em> (LIC). LicPy is our implementation in Python of the LIC method.</p>
+<p>There are a number of techniques to image vector fields. The most common one, known as hedgehog, is to draw an arrow at each point with a heading and a size matching the direction and magnitude of the vector field at that particular point (e.g. <code class="docutils literal notranslate"><span class="pre">quiver</span></code> in Matplotlib). Cabral and Leedom <a class="reference internal" href="#cabral1993" id="id1">[CL93]</a> proposed a new method to image vector fields called <em>line integral convolution</em> (LIC). LicPy is our implementation in Python of the LIC method.</p>
 <p>The method requires one to take a random noisy background texture, and for each pixel of the texture, streamlines of equal length are computed along the input vector field. One then integrates the background pixel values along each streamline to produce a single pixel value and a corresponding output texture. The output looks like a blurred version of the input, where the blurring is along the direction of the vector field that is being visualized, and is easy for the human eye to interpret.</p>
 <p>After generating the random texture, one needs to ensure that the input vector field and the random texture are of the same size, i.e. for each texture pixel there must be a single corresponding vector field value. If that is not the case, for example, if the vector field is sampled less densely, one can easily interpolate in a piecewise linear fashion to compute a value per texture pixel. Then, given a point (marked with x in Figure 1) one computes a stream-line going through that point both in the forward (as on the figure) and backward directions.</p>
 <a class="reference internal image-reference" href="_images/lic.png"><img alt="_images/lic.png" src="_images/lic.png" style="width: 320.0px; height: 320.0px;" /></a>
@@ -102,14 +102,17 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="#">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">LicPy</a><ul>
-<li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#references">References</a></li>
-</ul>
-</li>
-</ul>
+<h1 class="logo"><a href="#">LicPy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
@@ -117,13 +120,6 @@
   </ul></li>
 </ul>
 </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/index.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -144,7 +140,7 @@
       &copy;2018, Dzhelil Rufat.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
       
       |
