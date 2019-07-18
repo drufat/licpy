@@ -58,7 +58,7 @@ To understand how the LicPy library is to be used, one can take a look at the :p
     tex = runlic(vx, vy, L)
     grey_save(dest, tex)
 
-The :py:func:`runclic` function does most of the heavy-lifting. It takes as arguments the x- and y-component of the velocity at each pixel position, and the lenght L of the stream along with to convolute, and the result is returned as a grey-scale texture, which can then be saved into an image file using the :py:func:`grey_save` function.
+The :py:func:`runlic` function does most of the heavy-lifting. It takes as arguments the x- and y-component of the velocity at each pixel position, and the lenght L of the stream along with to convolute, and the result is returned as a grey-scale texture, which can then be saved into an image file using the :py:func:`grey_save` function.
 
 References
 ------------
