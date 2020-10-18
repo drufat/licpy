@@ -60,6 +60,8 @@ To understand how the LicPy library is to be used, one can take a look at the :p
 
 The :py:func:`runlic` function does most of the heavy-lifting. It takes as arguments the x- and y-component of the velocity at each pixel position, and the lenght L of the stream along with to convolute, and the result is returned as a grey-scale texture, which can then be saved into an image file using the :py:func:`grey_save` function.
 
+`runlic` can generate a random background grid to distort with the LIC algorithm, or the background grid can be specified with the `tex=` kwarg.
+
 References
 ------------
 
