@@ -1,4 +1,4 @@
-from licpy.resample import resample_s, resample_endpoints_s
+from .resample import resample_s, resample_endpoints_s
 
 
 def interpol(v, i, j, sx, sy):
