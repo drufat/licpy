@@ -1,7 +1,9 @@
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior() 
 
-from licpy.pixelize import pixelize
+
+from .pixelize import pixelize
 
 INF = 1e10
 
@@ -297,11 +299,14 @@ def runlic_resample(N, M, x, y, vx, vy, L, magnitude=True):
     return runlic(vx, vy, L, magnitude)
 
 
-def runlic(vx, vy, L, magnitude=True):
+def runlic(vx, vy, L, tex=None, magnitude=True):
     assert vx.shape == vy.shape
     N, M = vx.shape
     np.random.seed(13)
-    tex = np.random.rand(N, M)
+    if tex is None:
+        tex = np.random.rand(N, M)
+    else:
+        assert tex.shape == vx.shape
 
     tex_ = tf.placeholder(tf.float64, [N, M])
     vx_ = tf.placeholder(tf.float64, [N, M])
